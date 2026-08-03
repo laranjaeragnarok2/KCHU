@@ -24,10 +24,10 @@ O **kCHU** é uma aplicação web PWA mobile-first projetada para amantes de eco
 
 ```bash
 # Clone o repositório
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/laranjaeragnarok2/KCHU.git
 
 # Entre na pasta
-cd kchu
+cd KCHU
 
 # Instale as dependências
 npm install
@@ -35,10 +35,3 @@ npm install
 # Inicie o servidor de desenvolvimento
 npm run dev
 ```
-
-## ☁️ Deploy no Vercel
-
-O projeto está 100% pronto para deploy automático no Vercel via GitHub:
-1. Faça o push deste repositório para o seu GitHub.
-2. Importe o repositório no dashboard do [Vercel](https://vercel.com).
-3. Selecione o preset **Vite** e clique em **Deploy**.
