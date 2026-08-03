@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --bg-main: #0B1616;
   --bg-surface: #122121;
@@ -91,14 +93,14 @@ h1, h2, h3, h4, .font-heading {
 
 /* Glassmorphism Classes */
 .glass-panel {
-  background: rgba(22, 39, 39, 0.75);
+  background: rgba(22, 39, 39, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
 }
 
 .glass-card {
-  background: rgba(28, 48, 48, 0.65);
+  background: rgba(28, 48, 48, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
