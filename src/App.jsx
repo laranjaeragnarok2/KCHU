@@ -11,6 +11,7 @@ import { Compass, Bookmark, ShieldCheck, Award, MapPin, CheckCircle2, AlertTrian
 export default function App() {
   const [activeTab, setActiveTab] = useState('explore'); // 'explore', 'map', 'passport', 'safety'
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentCategory, setCategory] = useState('all');
   const [selectedWaterfall, setSelectedWaterfall] = useState(null);
   const [mapSelectedWaterfall, setMapSelectedWaterfall] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -78,7 +79,14 @@ export default function App() {
 
       if (!matchesSearch) return false;
 
-      // Difficulty
+      // Category Chip Filter
+      if (currentCategory === 'easy' && wf.difficulty !== 'Fácil') return false;
+      if (currentCategory === 'medium' && wf.difficulty !== 'Médio') return false;
+      if (currentCategory === 'hard' && wf.difficulty !== 'Difícil') return false;
+      if (currentCategory === 'free' && wf.isPaid) return false;
+      if (currentCategory === 'wikiloc' && !wf.wikilocId) return false;
+
+      // Modal Difficulty
       if (filters.difficulty !== 'Todas' && wf.difficulty !== filters.difficulty) {
         return false;
       }
@@ -94,7 +102,7 @@ export default function App() {
 
       return true;
     });
-  }, [searchQuery, filters]);
+  }, [searchQuery, currentCategory, filters]);
 
   const activeFiltersCount = useMemo(() => {
     let count = 0;
@@ -102,10 +110,12 @@ export default function App() {
     if (filters.canSwim) count++;
     if (filters.freeOnly) count++;
     if (filters.wikilocOnly) count++;
+    if (currentCategory !== 'all') count++;
     return count;
-  }, [filters]);
+  }, [filters, currentCategory]);
 
   const resetFilters = () => {
+    setCategory('all');
     setFilters({
       difficulty: 'Todas',
       canSwim: false,
@@ -115,7 +125,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] pb-24 flex flex-col">
+    <div className="relative min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] pb-24 flex flex-col font-body">
       {/* Top Header */}
       <TopHeader
         searchQuery={searchQuery}
@@ -123,42 +133,44 @@ export default function App() {
         onOpenFilter={() => setIsFilterOpen(true)}
         activeFiltersCount={activeFiltersCount}
         isOffline={isOffline}
+        currentCategory={currentCategory}
+        setCategory={setCategory}
       />
 
       {/* Main Content Body */}
       <main className="flex-1">
         {/* TAB 1: EXPLORAR (Feed de Cards & Destaques) */}
         {activeTab === 'explore' && (
-          <div className="p-4 space-y-5 animate-fade-in">
+          <div className="p-4 space-y-5 animate-fade-in max-w-[480px] mx-auto w-full">
             
             {/* Hero Welcome Banner */}
-            <div className="relative rounded-3xl overflow-hidden p-5 bg-gradient-to-br from-[#1B3232] to-[#112323] border border-[var(--border-gold)] shadow-xl">
-              <div className="absolute top-0 right-0 p-4 opacity-10 text-[var(--accent-gold)]">
-                <Sparkles size={120} />
+            <div className="relative rounded-3xl overflow-hidden p-5 bg-gradient-to-br from-[#182E2E] to-[#0F1E1E] border border-[var(--border-gold)] shadow-2xl">
+              <div className="absolute top-0 right-0 p-4 opacity-10 text-[var(--accent-gold)] pointer-events-none">
+                <Sparkles size={130} />
               </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[var(--accent-gold)] px-2.5 py-1 rounded-full bg-[var(--accent-gold-glow)] inline-block mb-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-gold)] px-3 py-1 rounded-full bg-[var(--accent-gold-glow)] inline-block mb-2 border border-[var(--border-gold)]">
                 Descubra o Inexplorado
               </span>
-              <h2 className="font-heading font-extrabold text-2xl text-[var(--text-primary)] leading-tight mb-1">
+              <h2 className="font-heading font-black text-2xl text-white leading-tight mb-1">
                 Explore as Melhores Cachoeiras do Brasil
               </h2>
-              <p className="text-xs text-[var(--text-secondary)] mb-3">
-                Trilhas mapeadas via Wikiloc, altimetria, volume de água em tempo real e status de sinal.
+              <p className="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+                Trilhas salvas via Wikiloc, altimetria, volume de água em tempo real e sinal de celular.
               </p>
-              <div className="flex items-center gap-2 text-xs">
-                <span className="font-bold text-[var(--accent-gold)]">{WATERFALLS_DATA.length} Cachoeiras</span>
+              <div className="flex items-center gap-2 text-xs font-semibold">
+                <span className="text-[var(--accent-gold)]">{WATERFALLS_DATA.length} Cachoeiras Mapeadas</span>
                 <span className="text-[var(--text-muted)]">•</span>
-                <span className="text-[var(--text-secondary)]">{visitedIds.length} Visitações Registradas</span>
+                <span className="text-emerald-400">{visitedIds.length} Visitações</span>
               </div>
             </div>
 
             {/* Section Header */}
-            <div className="flex items-center justify-between">
-              <h3 className="font-heading font-bold text-base text-[var(--text-primary)]">
-                {searchQuery ? `Resultados (${filteredWaterfalls.length})` : 'Próximas de Você'}
+            <div className="flex items-center justify-between pt-1">
+              <h3 className="font-heading font-black text-base text-white tracking-tight">
+                {searchQuery || currentCategory !== 'all' ? `Resultados (${filteredWaterfalls.length})` : 'Próximas de Você'}
               </h3>
               {activeFiltersCount > 0 && (
-                <button onClick={resetFilters} className="text-xs text-[var(--accent-gold)] hover:underline">
+                <button onClick={resetFilters} className="text-xs font-bold text-[var(--accent-gold)] hover:underline">
                   Limpar Filtros
                 </button>
               )}
@@ -202,34 +214,34 @@ export default function App() {
 
         {/* TAB 3: PASSAPORTE (Salvas e Check-ins) */}
         {activeTab === 'passport' && (
-          <div className="p-4 space-y-5 animate-fade-in">
+          <div className="p-4 space-y-5 animate-fade-in max-w-[480px] mx-auto w-full">
             {/* Passport Banner */}
-            <div className="glass-card p-5 border border-[var(--border-gold)] text-center relative overflow-hidden">
+            <div className="glass-card p-5 border border-[var(--border-gold)] text-center relative overflow-hidden shadow-2xl">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent-gold)] to-[var(--accent-gold-dark)] flex items-center justify-center mx-auto mb-2 text-[#0C1818] shadow-lg shadow-[var(--accent-gold-glow)]">
                 <Award size={28} />
               </div>
-              <h2 className="font-heading font-extrabold text-xl text-[var(--text-primary)]">
+              <h2 className="font-heading font-black text-xl text-white">
                 Seu Passaporte kCHU
               </h2>
-              <p className="text-xs text-[var(--text-muted)] mt-1 mb-3">
+              <p className="text-xs text-[var(--text-secondary)] mt-1 mb-3">
                 Conquiste selos ao fazer check-in nas cachoeiras visitadas!
               </p>
 
-              <div className="grid grid-cols-2 gap-2 text-left pt-2 border-t border-[var(--border-subtle)]">
-                <div className="p-2.5 rounded-xl bg-black/30">
-                  <span className="text-[10px] text-[var(--text-muted)] uppercase block">Check-ins Feitos</span>
-                  <span className="text-lg font-extrabold text-emerald-400">{visitedIds.length} Cachoeiras</span>
+              <div className="grid grid-cols-2 gap-2 text-left pt-3 border-t border-[var(--border-subtle)]">
+                <div className="p-3 rounded-2xl bg-black/40 border border-white/5">
+                  <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase block tracking-wider">Check-ins Feitos</span>
+                  <span className="text-lg font-black text-emerald-400">{visitedIds.length} Cachoeiras</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-black/30">
-                  <span className="text-[10px] text-[var(--text-muted)] uppercase block">Salvas na Lista</span>
-                  <span className="text-lg font-extrabold text-[var(--accent-gold)]">{savedIds.length} Salvas</span>
+                <div className="p-3 rounded-2xl bg-black/40 border border-white/5">
+                  <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase block tracking-wider">Salvas na Lista</span>
+                  <span className="text-lg font-black text-[var(--accent-gold)]">{savedIds.length} Salvas</span>
                 </div>
               </div>
             </div>
 
             {/* Visited Check-ins Section */}
             <div>
-              <h3 className="font-heading font-bold text-base text-[var(--text-primary)] mb-3 flex items-center gap-1.5">
+              <h3 className="font-heading font-black text-base text-white mb-3 flex items-center gap-2">
                 <CheckCircle2 size={18} className="text-emerald-400" />
                 <span>Cachoeiras Visitadas ({visitedIds.length})</span>
               </h3>
@@ -238,10 +250,10 @@ export default function App() {
                   <div key={wf.id} onClick={() => setSelectedWaterfall(wf)} className="glass-card p-3 flex items-center gap-3 cursor-pointer hover:border-[var(--border-gold)] transition-colors">
                     <img src={wf.image} alt={wf.name} className="w-14 h-14 rounded-xl object-cover" />
                     <div className="flex-1">
-                      <h4 className="font-bold text-sm text-[var(--text-primary)]">{wf.name}</h4>
-                      <p className="text-xs text-[var(--text-muted)]">{wf.locationName}</p>
+                      <h4 className="font-bold text-sm text-white">{wf.name}</h4>
+                      <p className="text-xs text-[var(--text-secondary)]">{wf.locationName}</p>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
+                    <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
                       Selo Conquistado
                     </span>
                   </div>
@@ -251,7 +263,7 @@ export default function App() {
 
             {/* Saved List Section */}
             <div>
-              <h3 className="font-heading font-bold text-base text-[var(--text-primary)] mb-3 flex items-center gap-1.5">
+              <h3 className="font-heading font-black text-base text-white mb-3 flex items-center gap-2">
                 <Bookmark size={18} className="text-[var(--accent-gold)]" />
                 <span>Lista de Desejos ({savedIds.length})</span>
               </h3>
@@ -260,8 +272,8 @@ export default function App() {
                   <div key={wf.id} onClick={() => setSelectedWaterfall(wf)} className="glass-card p-3 flex items-center gap-3 cursor-pointer hover:border-[var(--border-gold)] transition-colors">
                     <img src={wf.image} alt={wf.name} className="w-14 h-14 rounded-xl object-cover" />
                     <div className="flex-1">
-                      <h4 className="font-bold text-sm text-[var(--text-primary)]">{wf.name}</h4>
-                      <p className="text-xs text-[var(--text-muted)]">{wf.locationName}</p>
+                      <h4 className="font-bold text-sm text-white">{wf.name}</h4>
+                      <p className="text-xs text-[var(--text-secondary)]">{wf.locationName}</p>
                     </div>
                   </div>
                 ))}
@@ -272,8 +284,8 @@ export default function App() {
 
         {/* TAB 4: SEGURANÇA */}
         {activeTab === 'safety' && (
-          <div className="p-4 space-y-4 animate-fade-in">
-            <div className="glass-card p-5 border border-amber-500/30">
+          <div className="p-4 space-y-4 animate-fade-in max-w-[480px] mx-auto w-full">
+            <div className="glass-card p-5 border border-amber-500/30 shadow-2xl">
               <div className="flex items-center gap-2 text-amber-400 font-bold text-base mb-2">
                 <ShieldCheck size={20} />
                 <span>Central de Segurança do Trilheiro</span>
@@ -284,26 +296,26 @@ export default function App() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="font-heading font-bold text-sm text-[var(--text-primary)]">Telefones de Emergência Nacional</h3>
+              <h3 className="font-heading font-black text-sm text-white">Telefones de Emergência Nacional</h3>
               
-              <div className="glass-card p-3 flex items-center justify-between">
+              <div className="glass-card p-3.5 flex items-center justify-between">
                 <div>
-                  <h4 className="font-bold text-sm">Corpo de Bombeiros</h4>
-                  <p className="text-xs text-[var(--text-muted)]">Resgate em trilhas e rios</p>
+                  <h4 className="font-bold text-sm text-white">Corpo de Bombeiros</h4>
+                  <p className="text-xs text-[var(--text-secondary)]">Resgate em trilhas e rios</p>
                 </div>
-                <a href="tel:193" className="gold-gradient-btn px-4 py-1.5 text-xs flex items-center gap-1">
-                  <Phone size={12} />
+                <a href="tel:193" className="gold-gradient-btn px-4 py-2 text-xs flex items-center gap-1.5">
+                  <Phone size={14} />
                   <span>193</span>
                 </a>
               </div>
 
-              <div className="glass-card p-3 flex items-center justify-between">
+              <div className="glass-card p-3.5 flex items-center justify-between">
                 <div>
-                  <h4 className="font-bold text-sm">Defesa Civil</h4>
-                  <p className="text-xs text-[var(--text-muted)]">Alertas de enxurrada e chuvas</p>
+                  <h4 className="font-bold text-sm text-white">Defesa Civil</h4>
+                  <p className="text-xs text-[var(--text-secondary)]">Alertas de enxurrada e chuvas</p>
                 </div>
-                <a href="tel:199" className="gold-gradient-btn px-4 py-1.5 text-xs flex items-center gap-1">
-                  <Phone size={12} />
+                <a href="tel:199" className="gold-gradient-btn px-4 py-2 text-xs flex items-center gap-1.5">
+                  <Phone size={14} />
                   <span>199</span>
                 </a>
               </div>
