@@ -1,0 +1,16 @@
+{
+  "short_name": "kCHU",
+  "name": "kCHU - Mapeamento de Cachoeiras",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0C1818",
+  "theme_color": "#0C1818",
+  "display": "standalone",
+  "orientation": "portrait"
+}
