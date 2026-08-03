@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --bg-main: #070E12;
-  --bg-surface: #0D171E;
-  --bg-card: #0E1820;
-  --bg-card-elevated: #131F28;
-  --accent-gold: #E5A967;
-  --accent-gold-dark: #D49450;
-  --accent-gold-glow: rgba(229, 169, 103, 0.25);
-  --text-primary: #FFFFFF;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-gold: rgba(229, 169, 103, 0.3);
+  --bg-main: #0D1717;
+  --bg-surface: #051424;
+  --bg-card: #162525;
+  --accent-gold: #F9BA77;
+  --accent-amber: #E5A967;
+  --text-primary: #D4E4FA;
+  --text-muted: #8D9291;
+  --border-gold: rgba(224, 169, 109, 0.2);
   
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -26,7 +22,7 @@
 }
 
 body {
-  background-color: #04080B;
+  background-color: #051424;
   color: var(--text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
@@ -37,8 +33,8 @@ body {
 
 #root {
   width: 100%;
-  max-width: 440px; /* Exact smartphone screen aspect frame */
-  background-color: var(--bg-main);
+  max-width: 440px; /* Mobile Viewport Frame */
+  background-color: #0D1717;
   min-height: 100vh;
   position: relative;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
@@ -47,8 +43,12 @@ body {
 }
 
 /* Custom Scrollbars */
-::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Typography */
@@ -59,7 +59,7 @@ h1, h2, h3, h4, .font-heading {
 
 /* Leaflet Dark Theme Overrides */
 .leaflet-container {
-  background: #070E12 !important;
+  background: #051424 !important;
   width: 100%;
   height: 100%;
   border-radius: inherit;
@@ -67,29 +67,61 @@ h1, h2, h3, h4, .font-heading {
 .leaflet-tile {
   filter: brightness(0.65) invert(1) contrast(1.4) hue-rotate(195deg) saturate(0.2) !important;
 }
-.leaflet-control-zoom {
-  border: none !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
-}
-.leaflet-control-zoom-in, .leaflet-control-zoom-out {
-  background-color: var(--bg-card-elevated) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-subtle) !important;
-}
-.leaflet-control-attribution {
-  display: none !important;
-}
 
-/* Glassmorphism Classes */
+/* Glassmorphism Classes directly from Stitch Specs */
 .glass-panel {
-  background: rgba(13, 23, 30, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(22, 37, 37, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(224, 169, 109, 0.2);
 }
 
 .glass-card {
-  background: #0E1820;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #162525;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(224, 169, 109, 0.2);
+  border-radius: 24px;
+}
+
+.glass-pill {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+/* Pulsing dot animation from Stitch Screen 3 */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(249, 186, 119, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(249, 186, 119, 0);
+  }
+  100% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(249, 186, 119, 0);
+  }
+}
+
+.pulse-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #F9BA77;
+  animation: pulse-ring 2s infinite;
+  border: 3px solid #051424;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.trail-path {
+  stroke-dasharray: 10, 10;
+  animation: dash 20s linear infinite;
 }
 
 /* Animations */

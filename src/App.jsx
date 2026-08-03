@@ -5,14 +5,16 @@ import MapView from './components/map/MapView';
 import WaterfallCard from './components/waterfall/WaterfallCard';
 import DetailModal from './components/waterfall/DetailModal';
 import FilterModal from './components/filter/FilterModal';
+import ActiveNavigationModal from './components/map/ActiveNavigationModal';
 import { WATERFALLS_DATA } from './data/waterfalls';
-import { Award, CheckCircle2, Bookmark, ShieldCheck, Phone } from 'lucide-react';
+import { Award, CheckCircle2, Bookmark, ShieldCheck } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('explore'); // 'explore', 'map', 'passport', 'safety'
   const [searchQuery, setSearchQuery] = useState('');
   const [currentCategory, setCategory] = useState('all');
   const [selectedWaterfall, setSelectedWaterfall] = useState(null);
+  const [activeNavWaterfall, setActiveNavWaterfall] = useState(null);
   const [mapSelectedWaterfall, setMapSelectedWaterfall] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -45,12 +47,6 @@ export default function App() {
 
   const toggleSave = (id) => {
     setSavedIds(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
-  };
-
-  const toggleCheckin = (id) => {
-    setVisitedIds(prev =>
       prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
     );
   };
@@ -116,7 +112,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0B1515] text-white pb-24 flex flex-col font-body">
+    <div className="relative min-h-screen bg-[#0D1717] text-[#D4E4FA] pb-24 flex flex-col font-body">
       {/* Top Header */}
       <TopHeader
         searchQuery={searchQuery}
@@ -128,7 +124,7 @@ export default function App() {
       />
 
       {/* Main Content Body */}
-      <main className="flex-1 max-w-[480px] mx-auto w-full">
+      <main className="flex-1 max-w-[440px] mx-auto w-full">
         {/* TAB 1: EXPLORAR (Feed estilo Stitch Imagem 1) */}
         {activeTab === 'explore' && (
           <div className="p-4 space-y-6 animate-fade-in">
@@ -142,6 +138,7 @@ export default function App() {
                 <WaterfallCard
                   waterfall={featuredWaterfall}
                   onOpenDetail={(item) => setSelectedWaterfall(item)}
+                  onStartRoute={(item) => setActiveNavWaterfall(item)}
                   isSaved={savedIds.includes(featuredWaterfall.id)}
                   onToggleSave={toggleSave}
                   isCompact={false}
@@ -161,6 +158,7 @@ export default function App() {
                       key={wf.id}
                       waterfall={wf}
                       onOpenDetail={(item) => setSelectedWaterfall(item)}
+                      onStartRoute={(item) => setActiveNavWaterfall(item)}
                       isSaved={savedIds.includes(wf.id)}
                       onToggleSave={toggleSave}
                       isCompact={true}
@@ -173,7 +171,7 @@ export default function App() {
             {filteredWaterfalls.length === 0 && (
               <div className="glass-card p-8 text-center space-y-3 my-6">
                 <p className="text-sm font-semibold text-white/70">Nenhuma cachoeira encontrada com esses filtros.</p>
-                <button onClick={resetFilters} className="gold-gradient-btn px-4 py-2 text-xs font-bold">
+                <button onClick={resetFilters} className="px-4 py-2 bg-[#F9BA77] text-[#051424] rounded-full text-xs font-bold">
                   Resetar Filtros
                 </button>
               </div>
@@ -196,8 +194,8 @@ export default function App() {
         {/* TAB 3: PASSAPORTE (Salvas e Check-ins) */}
         {activeTab === 'passport' && (
           <div className="p-4 space-y-5 animate-fade-in">
-            <div className="glass-card p-5 border border-[#E5A967]/30 text-center relative overflow-hidden shadow-2xl">
-              <div className="w-14 h-14 rounded-2xl bg-[#E5A967] text-[#0B1515] flex items-center justify-center mx-auto mb-2 shadow-lg shadow-[#E5A967]/20 font-black">
+            <div className="glass-card p-5 border border-[#F9BA77]/30 text-center relative overflow-hidden shadow-2xl">
+              <div className="w-14 h-14 rounded-2xl bg-[#F9BA77] text-[#051424] flex items-center justify-center mx-auto mb-2 shadow-lg font-black">
                 <Award size={28} />
               </div>
               <h2 className="font-heading font-black text-xl text-white">
@@ -214,7 +212,7 @@ export default function App() {
                 </div>
                 <div className="p-3 rounded-2xl bg-black/40 border border-white/5">
                   <span className="text-[9px] font-bold text-white/50 uppercase block tracking-wider">Salvas na Lista</span>
-                  <span className="text-lg font-black text-[#E5A967]">{savedIds.length} Salvas</span>
+                  <span className="text-lg font-black text-[#F9BA77]">{savedIds.length} Salvas</span>
                 </div>
               </div>
             </div>
@@ -230,6 +228,7 @@ export default function App() {
                     key={wf.id}
                     waterfall={wf}
                     onOpenDetail={(item) => setSelectedWaterfall(item)}
+                    onStartRoute={(item) => setActiveNavWaterfall(item)}
                     isSaved={savedIds.includes(wf.id)}
                     onToggleSave={toggleSave}
                     isCompact={true}
@@ -244,26 +243,13 @@ export default function App() {
         {activeTab === 'safety' && (
           <div className="p-4 space-y-4 animate-fade-in">
             <div className="glass-card p-5 border border-amber-500/30 shadow-2xl">
-              <div className="flex items-center gap-2 text-amber-400 font-bold text-base mb-2">
+              <div className="flex items-center gap-2 text-[#F9BA77] font-bold text-base mb-2">
                 <ShieldCheck size={20} />
                 <span>Central de Segurança do Trilheiro</span>
               </div>
               <p className="text-xs text-white/70 leading-relaxed">
                 Boletins meteorológicos para cabeceiras e orientações para prevenção de tromba d'água.
               </p>
-            </div>
-
-            <div className="space-y-3">
-              <h3 className="font-heading font-black text-sm text-white">Telefones de Emergência</h3>
-              <div className="glass-card p-4 flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-sm text-white">Corpo de Bombeiros</h4>
-                  <p className="text-xs text-white/50">Resgate em trilhas e rios</p>
-                </div>
-                <a href="tel:193" className="py-2 px-4 rounded-full bg-[#E5A967] text-[#0B1515] font-black text-xs">
-                  193
-                </a>
-              </div>
             </div>
           </div>
         )}
@@ -273,16 +259,27 @@ export default function App() {
       <BottomNav
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        savedCount={savedIds.length}
       />
 
-      {/* Waterfall Detail Modal */}
+      {/* Waterfall Detail Modal (Screen 2) */}
       {selectedWaterfall && (
         <DetailModal
           waterfall={selectedWaterfall}
           onClose={() => setSelectedWaterfall(null)}
+          onStartRoute={(item) => {
+            setSelectedWaterfall(null);
+            setActiveNavWaterfall(item);
+          }}
           isSaved={savedIds.includes(selectedWaterfall.id)}
           onToggleSave={toggleSave}
+        />
+      )}
+
+      {/* Active GPS Trail Navigation Modal (Screen 3) */}
+      {activeNavWaterfall && (
+        <ActiveNavigationModal
+          waterfall={activeNavWaterfall}
+          onClose={() => setActiveNavWaterfall(null)}
         />
       )}
 
