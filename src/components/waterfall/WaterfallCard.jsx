@@ -1,109 +1,111 @@
 import React from 'react';
-import { Star, MapPin, Bookmark, Compass, Waves, ArrowRight } from 'lucide-react';
+import { Star, MapPin, Bookmark, Waves, ArrowRight, TrendingUp, Navigation, Compass } from 'lucide-react';
 
-export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onToggleSave }) {
+export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onToggleSave, isCompact = false }) {
+  // COMPACT CARD STYLE (Continuar Explorando)
+  if (isCompact) {
+    return (
+      <div 
+        onClick={() => onOpenDetail(waterfall)}
+        className="glass-card p-3 rounded-2xl flex items-center gap-3.5 cursor-pointer hover:border-[#E5A967]/50 transition-all duration-200 border border-white/10"
+      >
+        <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
+          <img src={waterfall.image} alt={waterfall.name} className="w-full h-full object-cover" />
+          <span className="absolute top-1 left-1 bg-black/70 backdrop-blur-md px-1.5 py-0.5 rounded text-[9px] font-bold text-white">
+            {waterfall.difficulty}
+          </span>
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <h4 className="font-heading font-bold text-base text-white truncate leading-snug mb-1">
+            {waterfall.name}
+          </h4>
+          <p className="text-xs text-white/60 flex items-center gap-2 mb-1">
+            <span>🗺️ {waterfall.trailDistance}</span>
+            <span>•</span>
+            <span>⏱️ {waterfall.trailTime}</span>
+          </p>
+          <p className="text-xs font-bold text-[#E5A967]">
+            {waterfall.price} {waterfall.priceSubtitle && `(${waterfall.priceSubtitle})`}
+          </p>
+        </div>
+
+        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0 hover:bg-[#E5A967] hover:text-[#0B1515] transition-colors">
+          <ArrowRight size={18} />
+        </div>
+      </div>
+    );
+  }
+
+  // FEATURED HERO CARD STYLE (Destaque da Semana)
   return (
-    <div className="glass-card overflow-hidden group hover:border-[var(--border-gold)] transition-all duration-300 shadow-xl">
-      {/* Card Image Banner */}
-      <div className="relative h-52 w-full overflow-hidden">
+    <div className="glass-card rounded-[28px] overflow-hidden border border-white/10 shadow-2xl transition-all">
+      {/* Hero Image */}
+      <div className="relative h-64 w-full overflow-hidden">
         <img
           src={waterfall.image}
           alt={waterfall.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-black/30 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#132222] via-black/20 to-transparent"></div>
 
-        {/* Top Floating Glass Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-          <div className="flex items-center gap-1.5">
-            <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-bold text-[var(--accent-gold)] border border-[var(--border-gold)] flex items-center gap-1 shadow-md">
-              <Star size={13} fill="currentColor" />
-              {waterfall.rating}
-              <span className="text-[10px] text-white/70 font-normal">({waterfall.reviewsCount})</span>
-            </span>
-            <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-semibold text-white border border-white/15">
-              {waterfall.difficulty}
-            </span>
-          </div>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleSave(waterfall.id);
-            }}
-            className={`p-2.5 rounded-full backdrop-blur-md transition-all border ${
-              isSaved
-                ? 'bg-[var(--accent-gold)] text-[#0C1818] border-[var(--accent-gold)] shadow-lg shadow-[var(--accent-gold-glow)]'
-                : 'bg-black/60 text-white border-white/20 hover:bg-black/80'
-            }`}
-            aria-label="Salvar nos favoritos"
-          >
-            <Bookmark size={16} fill={isSaved ? "currentColor" : "none"} />
-          </button>
-        </div>
-
-        {/* Bottom Image Status Pill */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-2">
-          <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-md ${
-            waterfall.safetyStatus.statusColor === 'safe'
-              ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/40'
-              : 'bg-amber-950/80 text-amber-400 border border-amber-500/40'
-          }`}>
-            Vol: {waterfall.safetyStatus.waterVolume}
+        {/* Floating Top Badges */}
+        <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+          <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-bold text-white border border-white/10 flex items-center gap-1">
+            <Star size={13} className="text-[#E5A967]" fill="currentColor" />
+            {waterfall.rating}
           </span>
-          {waterfall.wikilocId && (
-            <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 flex items-center gap-1 backdrop-blur-md">
-              <Compass size={11} /> Wikiloc
-            </span>
-          )}
+          <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-bold text-white border border-white/10">
+            {waterfall.difficulty}
+          </span>
         </div>
       </div>
 
-      {/* Card Body */}
-      <div className="p-4 sm:p-5">
-        <h3 className="font-heading font-black text-xl text-white leading-tight mb-1 group-hover:text-[var(--accent-gold)] transition-colors">
-          {waterfall.name}
-        </h3>
-
-        <p className="text-xs text-[var(--text-secondary)] flex items-center gap-1 mb-4">
-          <MapPin size={14} className="text-[var(--accent-gold)] shrink-0" />
-          <span className="line-clamp-1">{waterfall.locationName}</span>
-        </p>
-
-        {/* Technical Specs Grid (Clean, readable, no squeeze!) */}
-        <div className="grid grid-cols-3 gap-2 p-3 rounded-2xl bg-[var(--bg-main)]/60 border border-[var(--border-subtle)] mb-4 text-center">
+      {/* Hero Card Body */}
+      <div className="p-5 bg-[#132222]">
+        {/* Title & Price Row */}
+        <div className="flex items-start justify-between gap-2 mb-3">
           <div>
-            <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase block tracking-wider mb-0.5">Queda & Poço</span>
-            <span className="text-xs font-extrabold text-white block">{waterfall.height}</span>
-            <span className="text-[10px] text-[var(--text-secondary)] font-medium block">{waterfall.depth}</span>
+            <h3 className="font-heading font-black text-2xl text-white leading-tight">
+              {waterfall.name}
+            </h3>
           </div>
-
-          <div>
-            <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase block tracking-wider mb-0.5">Trilha</span>
-            <span className="text-xs font-extrabold text-white block">{waterfall.trailDistance}</span>
-            <span className="text-[10px] text-[var(--text-secondary)] font-medium block">{waterfall.trailTime}</span>
-          </div>
-
-          <div>
-            <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase block tracking-wider mb-0.5">Desnível</span>
-            <span className="text-xs font-extrabold text-[var(--accent-gold)] block">{waterfall.elevationGain}</span>
-            <span className="text-[10px] text-[var(--text-secondary)] font-medium block">Altimetria</span>
+          <div className="text-right shrink-0">
+            <span className="text-xl font-black text-[#E5A967] block">{waterfall.price}</span>
+            {waterfall.priceSubtitle && (
+              <span className="text-[10px] text-white/50 block font-medium">{waterfall.priceSubtitle}</span>
+            )}
           </div>
         </div>
 
-        {/* Card Action Footer */}
-        <div className="flex items-center justify-between pt-2 border-t border-[var(--border-subtle)] gap-2">
-          <div className="flex flex-col">
-            <span className="text-[9px] font-bold uppercase text-[var(--text-muted)] tracking-wider">Acesso</span>
-            <span className="text-xs font-extrabold text-[var(--accent-gold)]">{waterfall.price}</span>
-          </div>
+        {/* Metrics Row */}
+        <div className="flex items-center gap-3 text-xs text-white/70 py-2 border-y border-white/10 my-3">
+          <span className="flex items-center gap-1">
+            <span className="text-[#E5A967]">💧</span> Fluxo: {waterfall.safetyStatus.waterVolume}
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1">
+            <span>🗺️</span> {waterfall.trailDistance}
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1">
+            <TrendingUp size={14} className="text-[#E5A967]" /> {waterfall.elevationGain}
+          </span>
+        </div>
 
+        {/* Two Action Buttons (VER FICHA & ROTA) */}
+        <div className="grid grid-cols-2 gap-3 pt-2">
           <button
             onClick={() => onOpenDetail(waterfall)}
-            className="gold-gradient-btn px-4 py-2.5 text-xs flex items-center gap-1.5 shrink-0"
+            className="py-3 px-4 rounded-full border border-white/30 text-white font-bold text-xs hover:border-[#E5A967] hover:text-[#E5A967] transition-all tracking-wider uppercase text-center"
           >
-            <span>Ver Ficha & Rota</span>
-            <ArrowRight size={14} />
+            Ver Ficha
+          </button>
+          <button
+            onClick={() => onOpenDetail(waterfall)}
+            className="py-3 px-4 rounded-full bg-[#E5A967] text-[#0B1515] font-black text-xs hover:bg-[#d69755] transition-all tracking-wider uppercase text-center shadow-lg shadow-[#E5A967]/20"
+          >
+            Rota
           </button>
         </div>
       </div>

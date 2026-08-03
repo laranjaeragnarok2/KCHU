@@ -1,246 +1,153 @@
 export const WATERFALLS_DATA = [
   {
-    id: "santa-barbara",
-    name: "Cachoeira Santa Bárbara",
-    locationName: "Cavalcante, Chapada dos Veadeiros - GO",
-    lat: -13.5936,
-    lng: -47.4578,
+    id: "dragao",
+    name: "Cachoeira do Dragão",
+    locationName: "Vila de São Jorge, Chapada dos Veadeiros - GO",
+    lat: -14.1685,
+    lng: -47.8188,
     rating: 4.9,
-    reviewsCount: 342,
-    difficulty: "Fácil",
-    difficultyLevel: 1,
-    trailDistance: "1.8 km (Ida e Volta)",
-    trailTime: "40 min",
-    elevationGain: "+65m",
-    price: "R$ 55 (Entrada + Guia Kalunga)",
+    reviewsCount: 240,
+    difficulty: "Média",
+    difficultyLevel: 2,
+    trailDistance: "5.2 km",
+    trailTime: "2h 15min",
+    elevationGain: "+120m",
+    price: "R$ 55",
+    priceSubtitle: "Entrada + Guia",
     isPaid: true,
     swimSuitability: "Perfeita para Banho",
+    waterTemp: "Gelada",
     canSwim: true,
-    sunIncidence: "10:30 às 13:30 (Água incrivelmente azul)",
-    height: "28m",
-    depth: "3m (Água cristalina)",
+    sunIncidence: "10:30 às 14:00",
+    height: "35m",
+    depth: "4m (Poço profundo)",
     guideRequired: true,
     petFriendly: false,
-    childFriendly: true,
-    
-    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/cachoeira-santa-barbara-cavalcante-go-24810293",
-    wikilocId: "24810293",
+    childFriendly: false,
+    isFeatured: true, // Destaque da Semana
+
+    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/cachoeira-do-dragao-chapada-dos-veadeiros-15829102",
+    wikilocId: "15829102",
     elevationProfile: [
-      { km: 0, alt: 940 },
-      { km: 0.3, alt: 932 },
-      { km: 0.6, alt: 915 },
-      { km: 0.9, alt: 890 }
+      { km: 0, alt: 980 },
+      { km: 1.5, alt: 1040 },
+      { km: 3.2, alt: 1100 }
     ],
 
     safetyStatus: {
       waterVolume: "Normal",
       statusColor: "safe",
       flashFloodRisk: "Baixo",
-      cellSignal: "Sem Sinal na Trilha (Pegar Kalunga na base)",
-      lastReport: "Hoje às 09:15 por Guia Mateus"
+      cellSignal: "Sem Sinal na Trilha",
+      lastReport: "Hoje às 09:00 por Guia Lucas"
     },
 
     image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1511497584788-876761c139d6?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1511497584788-876761c139d6?auto=format&fit=crop&w=1000&q=80"
     ],
-    description: "Famosa mundialmente pelo poço de tom azul-turquesa radiante. Localizada na Comunidade Quilombola Kalunga do Engenho II. A visibilidade da água é inacreditável no horário de sol pleno.",
-    infrastructure: ["Estacionamento na Base", "Lanchonete Quilombola", "Jangada / Transporte local", "Sanitários"]
+    description: "Uma experiência de travessia e aventura única no cânion do rio. A Cachoeira do Dragão fica escondida entre paredões de rocha avermelhada e possui um poço gigantesco de águas profundas.",
+    infrastructure: ["Estacionamento na Base", "Venda de lanches", "Equipamento de segurança fornecido"]
   },
   {
-    id: "casca-d-anta",
-    name: "Cachoeira Casca d'Anta",
-    locationName: "São Roque de Minas, Serra da Canastra - MG",
-    lat: -20.3092,
-    lng: -46.5233,
-    rating: 4.8,
-    reviewsCount: 218,
-    difficulty: "Médio",
-    difficultyLevel: 2,
-    trailDistance: "3.5 km (Parte Baixa + Trilha Alta)",
-    trailTime: "1h 30min",
-    elevationGain: "+210m",
-    price: "R$ 18 (Ingresso Parque)",
+    id: "santa-barbara",
+    name: "Cachoeira Santa Bárbara",
+    locationName: "Cavalcante, GO",
+    lat: -13.5936,
+    lng: -47.4578,
+    rating: 5.0,
+    reviewsCount: 120,
+    difficulty: "Fácil",
+    difficultyLevel: 1,
+    trailDistance: "1.5 km",
+    trailTime: "30 min",
+    elevationGain: "+45m",
+    price: "R$ 55",
+    priceSubtitle: "Entrada + Guia Kalunga",
     isPaid: true,
-    swimSuitability: "Apenas Contemplação no Poço Principal",
-    canSwim: false,
-    sunIncidence: "09:00 às 15:00",
-    height: "186m",
-    depth: "Muito Fundo / Correnteza Forte",
-    guideRequired: false,
+    swimSuitability: "Perfeita para Banho",
+    waterTemp: "Gelada",
+    canSwim: true,
+    sunIncidence: "10:30 às 13:30 (Água incrivelmente azul)",
+    height: "28m",
+    depth: "3m (Água azul turquesa)",
+    guideRequired: true,
     petFriendly: false,
     childFriendly: true,
+    isFeatured: false,
 
-    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/trilha-da-casca-danta-parte-baixa-serra-da-canastra-1940129",
-    wikilocId: "1940129",
+    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/cachoeira-santa-barbara-cavalcante-go-24810293",
+    wikilocId: "24810293",
     elevationProfile: [
-      { km: 0, alt: 720 },
-      { km: 0.5, alt: 735 },
-      { km: 1.0, alt: 760 },
-      { km: 1.7, alt: 900 }
+      { km: 0, alt: 940 },
+      { km: 0.5, alt: 915 },
+      { km: 1.5, alt: 890 }
     ],
 
     safetyStatus: {
-      waterVolume: "Alto (Volume Forte)",
-      statusColor: "warning",
-      flashFloodRisk: "Moderado (Cabeceira no Chapadão)",
-      cellSignal: "Apenas Vivo perto da portaria",
-      lastReport: "Ontem às 16:30 por Parque Nacional"
+      waterVolume: "Normal",
+      statusColor: "safe",
+      flashFloodRisk: "Baixo",
+      cellSignal: "Sem Sinal na Trilha",
+      lastReport: "Hoje às 09:15 por Guia Mateus"
     },
 
     image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1000&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80"
     ],
-    description: "A primeira grande queda do Rio São Francisco. Uma parede imponente de 186 metros de altura com o spray da água atingindo centenas de metros na mata ciliar.",
-    infrastructure: ["Portaria ICMBio", "Estacionamento Gratuito", "Área de Picnic", "Banheiros"]
+    description: "Uma das cachoeiras mais famosas e impressionantes da Chapada dos Veadeiros. Com águas de um azul turquesa inesquecível e uma queda majestosa, a Santa Bárbara oferece um poço perfeito para banho. A trilha é relativamente curta e plana, tornando o acesso fácil para a maioria dos visitantes, embora exija acompanhamento de guia credenciado.",
+    infrastructure: ["Estacionamento na Base", "Lanchonete Quilombola", "Jangada / Transporte local", "Sanitários"]
   },
   {
-    id: "cachoeira-do-gato",
-    name: "Cachoeira do Gato",
-    locationName: "Ilhabela - SP",
-    lat: -23.7915,
-    lng: -45.2753,
+    id: "macacos",
+    name: "Cachoeira dos Macacos",
+    locationName: "Alto Paraíso de Goiás - GO",
+    lat: -14.1333,
+    lng: -47.5167,
     rating: 4.7,
-    reviewsCount: 189,
-    difficulty: "Médio",
-    difficultyLevel: 2,
-    trailDistance: "4.0 km (A partir de Castelhanos)",
-    trailTime: "1h 15min",
-    elevationGain: "+140m",
-    price: "Gratuito",
+    reviewsCount: 95,
+    difficulty: "Fácil",
+    difficultyLevel: 1,
+    trailDistance: "1.8 km",
+    trailTime: "45 min",
+    elevationGain: "+30m",
+    price: "Grátis",
+    priceSubtitle: "Sem Guia",
     isPaid: false,
-    swimSuitability: "Excelente Poço Principal",
+    swimSuitability: "Ótima para Banho",
+    waterTemp: "Agradável",
     canSwim: true,
-    sunIncidence: "11:00 às 14:00",
-    height: "40m",
-    depth: "2.5m",
+    sunIncidence: "09:00 às 15:00",
+    height: "15m",
+    depth: "2m",
     guideRequired: false,
     petFriendly: true,
-    childFriendly: false,
+    childFriendly: true,
+    isFeatured: false,
 
-    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/praia-dos-castelhanos-cachoeira-do-gato-ilhabela-1284910",
+    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/cachoeira-dos-macacos-alto-paraiso-1284910",
     wikilocId: "1284910",
     elevationProfile: [
-      { km: 0, alt: 5 },
-      { km: 0.8, alt: 45 },
-      { km: 1.5, alt: 95 },
-      { km: 2.0, alt: 110 }
+      { km: 0, alt: 1000 },
+      { km: 0.9, alt: 980 }
     ],
 
     safetyStatus: {
       waterVolume: "Normal",
       statusColor: "safe",
       flashFloodRisk: "Baixo",
-      cellSignal: "Sem Sinal de nenhuma operadora",
-      lastReport: "Hoje às 08:00 por Monitor Ambiental"
+      cellSignal: "Pega Vivo na trilha",
+      lastReport: "Hoje às 11:00 por Morador Local"
     },
 
     image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1546484475-7f7bd55792da?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80"
     ],
-    description: "Uma das cachoeiras mais volumosas de Ilhabela, escondida no coração da Mata Atlântica após a famosa Praia dos Castelhanos. Queda d'água cristalina e refrescante.",
-    infrastructure: ["Ponte suspensa", "Duchas naturais", "Quiosque na Praia dos Castelhanos"]
-  },
-  {
-    id: "fumaca",
-    name: "Cachoeira da Fumaça",
-    locationName: "Palmeiras, Chapada Diamantina - BA",
-    lat: -12.6019,
-    lng: -41.4533,
-    rating: 4.9,
-    reviewsCount: 412,
-    difficulty: "Difícil",
-    difficultyLevel: 3,
-    trailDistance: "12 km (Subida Íngreme da Serra)",
-    trailTime: "4h 30min",
-    elevationGain: "+480m",
-    price: "Gratuito (Doação voluntária ACVB)",
-    isPaid: false,
-    swimSuitability: "Apenas Contemplação no Mirante",
-    canSwim: false,
-    sunIncidence: "Dia Inteiro (Exposta no topo)",
-    height: "340m",
-    depth: "Sem Poço (A água evapora antes de tocar o chão)",
-    guideRequired: false,
-    petFriendly: false,
-    childFriendly: false,
-
-    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/trilha-da-cachoeira-da-fumaca-por-cima-vale-do-capao-741912",
-    wikilocId: "741912",
-    elevationProfile: [
-      { km: 0, alt: 980 },
-      { km: 2.0, alt: 1320 },
-      { km: 4.0, alt: 1410 },
-      { km: 6.0, alt: 1390 }
-    ],
-
-    safetyStatus: {
-      waterVolume: "Vento Forte (Cuidado no Abismo)",
-      statusColor: "warning",
-      flashFloodRisk: "Baixo no Topo",
-      cellSignal: "Pega Claro/Tim em alguns pontos da serra",
-      lastReport: "Ontem às 17:00 por Associação de Guias do Capão"
-    },
-
-    image: "https://images.unsplash.com/photo-1546484475-7f7bd55792da?auto=format&fit=crop&w=1000&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1546484475-7f7bd55792da?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80"
-    ],
-    description: "Uma das maiores quedas d'água do Brasil (340m). Pelo impressionante vento que sobe o cânion, a água não chega ao chão e borrifa de volta para o céu como fumaça.",
-    infrastructure: ["Posto de Controle da Associação", "Água potável na base", "Guias credenciados"]
-  },
-  {
-    id: "saltos-do-rio-preto",
-    name: "Saltos do Rio Preto (120m)",
-    locationName: "Alto Paraíso de Goiás, Chapada dos Veadeiros - GO",
-    lat: -14.1625,
-    lng: -47.8028,
-    rating: 4.8,
-    reviewsCount: 298,
-    difficulty: "Médio",
-    difficultyLevel: 2,
-    trailDistance: "9.0 km (Trilha Vermelha)",
-    trailTime: "3h 30min",
-    elevationGain: "+180m",
-    price: "R$ 40 (Entrada Parque Nacional)",
-    isPaid: true,
-    swimSuitability: "Excelente no Poço do Salto de 80m",
-    canSwim: true,
-    sunIncidence: "10:00 às 15:00",
-    height: "120m & 80m",
-    depth: "4m no poço do Salto 80m",
-    guideRequired: false,
-    petFriendly: false,
-    childFriendly: false,
-
-    wikilocUrl: "https://pt.wikiloc.com/trilhas-caminhada/trilha-dos-saltos-parque-nacional-da-chapada-dos-veadeiros-15829102",
-    wikilocId: "15829102",
-    elevationProfile: [
-      { km: 0, alt: 1020 },
-      { km: 2.2, alt: 980 },
-      { km: 4.5, alt: 890 }
-    ],
-
-    safetyStatus: {
-      waterVolume: "Normal",
-      statusColor: "safe",
-      flashFloodRisk: "Baixo",
-      cellSignal: "Sem Sinal no Parque",
-      lastReport: "Hoje às 10:00 por Brigada do Parque"
-    },
-
-    image: "https://images.unsplash.com/photo-1511497584788-876761c139d6?auto=format&fit=crop&w=1000&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1511497584788-876761c139d6?auto=format&fit=crop&w=1000&q=80"
-    ],
-    description: "O cartão-postal do Parque Nacional da Chapada dos Veadeiros. Mirante épico com vista para a queda de 120 metros e banho de energia no poço de 80 metros.",
-    infrastructure: ["Centro de Visitantes", "Socorristas", "Banheiros", "Pontos de hidratação"]
+    description: "Cachoeira de fácil acesso ideal para famílias. Conta com quedas menores em sequência e poços rasos transparentes cercados por vegetação nativa.",
+    infrastructure: ["Estacionamento de terra", "Sinalização na trilha"]
   }
 ];
