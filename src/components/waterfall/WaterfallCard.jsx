@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, MapPin, Bookmark, Waves, ArrowRight, TrendingUp, Navigation, Compass } from 'lucide-react';
+import { Star, ArrowRight, TrendingUp } from 'lucide-react';
 
 export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onToggleSave, isCompact = false }) {
   // COMPACT CARD STYLE (Continuar Explorando)
@@ -7,7 +7,7 @@ export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onTogg
     return (
       <div 
         onClick={() => onOpenDetail(waterfall)}
-        className="glass-card p-3 rounded-2xl flex items-center gap-3.5 cursor-pointer hover:border-[#E5A967]/50 transition-all duration-200 border border-white/10"
+        className="glass-card p-3 rounded-2xl flex items-center gap-3.5 cursor-pointer hover:border-[#E5A967]/50 transition-all duration-200 border border-white/10 bg-[#0E1820]"
       >
         <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
           <img src={waterfall.image} alt={waterfall.name} className="w-full h-full object-cover" />
@@ -30,7 +30,7 @@ export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onTogg
           </p>
         </div>
 
-        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0 hover:bg-[#E5A967] hover:text-[#0B1515] transition-colors">
+        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0 hover:bg-[#E5A967] hover:text-[#070E12] transition-colors">
           <ArrowRight size={18} />
         </div>
       </div>
@@ -39,7 +39,7 @@ export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onTogg
 
   // FEATURED HERO CARD STYLE (Destaque da Semana)
   return (
-    <div className="glass-card rounded-[28px] overflow-hidden border border-white/10 shadow-2xl transition-all">
+    <div className="glass-card rounded-[28px] overflow-hidden border border-white/10 shadow-2xl transition-all bg-[#0E1820]">
       {/* Hero Image */}
       <div className="relative h-64 w-full overflow-hidden">
         <img
@@ -47,22 +47,22 @@ export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onTogg
           alt={waterfall.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#132222] via-black/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1820] via-black/20 to-transparent"></div>
 
         {/* Floating Top Badges */}
         <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-          <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-bold text-white border border-white/10 flex items-center gap-1">
+          <span className="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-xs font-bold text-white border border-white/10 flex items-center gap-1">
             <Star size={13} className="text-[#E5A967]" fill="currentColor" />
             {waterfall.rating}
           </span>
-          <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-bold text-white border border-white/10">
+          <span className="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-xs font-bold text-white border border-white/10">
             {waterfall.difficulty}
           </span>
         </div>
       </div>
 
       {/* Hero Card Body */}
-      <div className="p-5 bg-[#132222]">
+      <div className="p-5 bg-[#0E1820]">
         {/* Title & Price Row */}
         <div className="flex items-start justify-between gap-2 mb-3">
           <div>
@@ -79,7 +79,7 @@ export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onTogg
         </div>
 
         {/* Metrics Row */}
-        <div className="flex items-center gap-3 text-xs text-white/70 py-2 border-y border-white/10 my-3">
+        <div className="flex items-center gap-3 text-xs text-white/70 py-2.5 border-y border-white/10 my-3">
           <span className="flex items-center gap-1">
             <span className="text-[#E5A967]">💧</span> Fluxo: {waterfall.safetyStatus.waterVolume}
           </span>
@@ -94,16 +94,16 @@ export default function WaterfallCard({ waterfall, onOpenDetail, isSaved, onTogg
         </div>
 
         {/* Two Action Buttons (VER FICHA & ROTA) */}
-        <div className="grid grid-cols-2 gap-3 pt-2">
+        <div className="grid grid-cols-2 gap-3 pt-1">
           <button
             onClick={() => onOpenDetail(waterfall)}
-            className="py-3 px-4 rounded-full border border-white/30 text-white font-bold text-xs hover:border-[#E5A967] hover:text-[#E5A967] transition-all tracking-wider uppercase text-center"
+            className="py-3 px-4 rounded-full border border-white/20 text-white font-bold text-xs hover:border-[#E5A967] hover:text-[#E5A967] transition-all tracking-wider uppercase text-center"
           >
             Ver Ficha
           </button>
           <button
             onClick={() => onOpenDetail(waterfall)}
-            className="py-3 px-4 rounded-full bg-[#E5A967] text-[#0B1515] font-black text-xs hover:bg-[#d69755] transition-all tracking-wider uppercase text-center shadow-lg shadow-[#E5A967]/20"
+            className="py-3 px-4 rounded-full bg-[#E5A967] text-[#070E12] font-black text-xs hover:bg-[#d69755] transition-all tracking-wider uppercase text-center shadow-lg shadow-[#E5A967]/20"
           >
             Rota
           </button>

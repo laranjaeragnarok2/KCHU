@@ -1,21 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg-main: #0B1616;
-  --bg-surface: #122121;
-  --bg-card: #162727;
-  --bg-card-elevated: #1C3030;
-  --accent-gold: #E0A96D;
-  --accent-gold-dark: #C68E54;
-  --accent-gold-glow: rgba(224, 169, 109, 0.25);
-  --text-primary: #F3F7F7;
-  --text-secondary: #B0C0C0;
-  --text-muted: #738585;
+  --bg-main: #070E12;
+  --bg-surface: #0D171E;
+  --bg-card: #0E1820;
+  --bg-card-elevated: #131F28;
+  --accent-gold: #E5A967;
+  --accent-gold-dark: #D49450;
+  --accent-gold-glow: rgba(229, 169, 103, 0.25);
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-gold: rgba(224, 169, 109, 0.3);
-  --status-safe: #2DD4BF;
-  --status-warning: #F59E0B;
-  --status-danger: #EF4444;
+  --border-gold: rgba(229, 169, 103, 0.3);
   
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -29,7 +26,7 @@
 }
 
 body {
-  background-color: #060D0D;
+  background-color: #04080B;
   color: var(--text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
@@ -40,26 +37,18 @@ body {
 
 #root {
   width: 100%;
-  max-width: 480px; /* Mobile Viewport frame on desktop, 100% on mobile */
+  max-width: 440px; /* Exact smartphone screen aspect frame */
   background-color: var(--bg-main);
   min-height: 100vh;
   position: relative;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
 }
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-main);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--bg-card-elevated);
-  border-radius: 10px;
+  display: none;
 }
 
 /* Typography */
@@ -70,17 +59,17 @@ h1, h2, h3, h4, .font-heading {
 
 /* Leaflet Dark Theme Overrides */
 .leaflet-container {
-  background: #091313 !important;
+  background: #070E12 !important;
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
 .leaflet-tile {
-  filter: brightness(0.7) invert(1) contrast(1.3) hue-rotate(200deg) saturate(0.3) !important;
+  filter: brightness(0.65) invert(1) contrast(1.4) hue-rotate(195deg) saturate(0.2) !important;
 }
 .leaflet-control-zoom {
   border: none !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
 }
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
   background-color: var(--bg-card-elevated) !important;
@@ -93,61 +82,14 @@ h1, h2, h3, h4, .font-heading {
 
 /* Glassmorphism Classes */
 .glass-panel {
-  background: rgba(22, 39, 39, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
+  background: rgba(13, 23, 30, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .glass-card {
-  background: rgba(28, 48, 48, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-}
-
-.gold-gradient-btn {
-  background: linear-gradient(135deg, #E0A96D 0%, #C68E54 100%);
-  color: #0C1818;
-  font-weight: 700;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px var(--accent-gold-glow);
-  transition: all 0.2s ease;
-}
-.gold-gradient-btn:active {
-  transform: scale(0.97);
-  opacity: 0.9;
-}
-
-.badge-tag {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 4px 10px;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-/* Custom Marker Styling */
-.custom-waterfall-pin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  background: var(--bg-surface);
-  border: 2px solid var(--accent-gold);
-  border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 12px var(--accent-gold-glow);
-  color: var(--accent-gold);
-  font-weight: bold;
-}
-.custom-waterfall-pin.active {
-  transform: scale(1.2);
-  background: var(--accent-gold);
-  color: #0C1818;
+  background: #0E1820;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Animations */

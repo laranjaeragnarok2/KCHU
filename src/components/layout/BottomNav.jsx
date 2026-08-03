@@ -1,17 +1,17 @@
 import React from 'react';
-import { Compass, Map, Bookmark, ShieldCheck } from 'lucide-react';
+import { Compass, Map, Heart, User } from 'lucide-react';
 
-export default function BottomNav({ activeTab, setActiveTab, savedCount }) {
+export default function BottomNav({ activeTab, setActiveTab }) {
   const navItems = [
-    { id: 'explore', label: 'Explorar', icon: Compass },
-    { id: 'map', label: 'Mapa', icon: Map },
-    { id: 'passport', label: 'Passaporte', icon: Bookmark, badge: savedCount },
-    { id: 'safety', label: 'Segurança', icon: ShieldCheck }
+    { id: 'explore', icon: Compass },
+    { id: 'map', icon: Map },
+    { id: 'passport', icon: Heart },
+    { id: 'safety', icon: User }
   ];
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-[440px] z-40">
-      <nav className="glass-panel rounded-3xl p-2 shadow-2xl shadow-black/80 flex items-center justify-around border border-white/10">
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[390px] z-40">
+      <nav className="bg-[#0E1820]/95 backdrop-blur-xl rounded-full p-2 border border-white/10 shadow-2xl flex items-center justify-around">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -19,20 +19,13 @@ export default function BottomNav({ activeTab, setActiveTab, savedCount }) {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`relative flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all duration-200 ${
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
                 isActive
-                  ? 'bg-[var(--accent-gold)] text-[#0C1818] font-bold scale-105 shadow-md shadow-[var(--accent-gold-glow)]'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+                  ? 'bg-[#15232F] text-[#E5A967] ring-2 ring-[#E5A967] shadow-lg shadow-[#E5A967]/20 scale-105'
+                  : 'text-white/60 hover:text-white'
               }`}
             >
-              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.8} />
-              <span className="text-[11px] tracking-tight">{item.label}</span>
-
-              {item.badge > 0 && !isActive && (
-                <span className="absolute top-1 right-2 w-4 h-4 bg-[var(--accent-gold)] text-[#0C1818] font-bold text-[9px] rounded-full flex items-center justify-center">
-                  {item.badge}
-                </span>
-              )}
+              <Icon size={22} strokeWidth={isActive ? 2.5 : 1.8} />
             </button>
           );
         })}
